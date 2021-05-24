@@ -1,0 +1,22 @@
+#######################################
+# Syntax Coloring Map For Forecaster
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+Forecaster	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setH	KEYWORD2
+addP	KEYWORD2
+addPmm	KEYWORD2
+setMonth	KEYWORD2
+getCast	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
