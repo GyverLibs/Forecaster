@@ -1,4 +1,4 @@
-[![Foo](https://img.shields.io/badge/Version-1.0-brightgreen.svg?style=flat-square)](#versions)
+[![Foo](https://img.shields.io/badge/Version-1.1-brightgreen.svg?style=flat-square)](#versions)
 [![Foo](https://img.shields.io/badge/Website-AlexGyver.ru-blue.svg?style=flat-square)](https://alexgyver.ru/)
 [![Foo](https://img.shields.io/badge/%E2%82%BD$%E2%82%AC%20%D0%9D%D0%B0%20%D0%BF%D0%B8%D0%B2%D0%BE-%D1%81%20%D1%80%D1%8B%D0%B1%D0%BA%D0%BE%D0%B9-orange.svg?style=flat-square)](https://alexgyver.ru/support_alex/)
 
@@ -46,6 +46,7 @@ void addP(long P, float t);     // добавить текущее давлен�
 void addPmm(float P, float t);  // добавить текущее давление в мм.рт.ст и температуру в С (КАЖДЫЕ 30 МИНУТ)
 void setMonth(uint8_t month);   // установить месяц (1-12), 0 чтобы отключить сезонность
 float getCast();                // получить прогноз (0 хорошая погода... 10 ливень-шторм)
+int getTrend();                 // получить изменение давления в Па за 3 часа
 ```
 
 <a id="example"></a>
@@ -80,6 +81,7 @@ void loop() {
 <a id="versions"></a>
 ## Версии
 - v1.0
+- v1.1 - добавил вывод тренда давления за 3 часа
 
 <a id="feedback"></a>
 ## Баги и обратная связь

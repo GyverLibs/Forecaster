@@ -16,6 +16,7 @@ addP	KEYWORD2
 addPmm	KEYWORD2
 setMonth	KEYWORD2
 getCast	KEYWORD2
+getTrend	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

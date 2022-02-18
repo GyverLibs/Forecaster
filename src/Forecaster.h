@@ -16,6 +16,7 @@
 
     Версии:
     v1.0 - релиз
+    v1.1 - добавил вывод тренда давления за 3 часа
 */
 
 #ifndef Forecaster_h
@@ -39,11 +40,11 @@ public:
             for (uint8_t i = 0; i < _FC_SIZE; i++) Parr[i] = P;
         } else {
             for (uint8_t i = 0; i < (_FC_SIZE-1); i++) Parr[i] = Parr[i + 1];
-            Parr[_FC_SIZE-1] = P;
+            Parr[_FC_SIZE - 1] = P;
         }
         
         // расчёт изменения по наименьшим квадратам
-        float a, delta;
+        float a;
         uint32_t sumX = 0, sumY = 0, sumX2 = 0, sumXY = 0;        
         for (int i = 0; i < _FC_SIZE; i++) {
             sumX += i;
@@ -53,7 +54,7 @@ public:
         }
         a = _FC_SIZE * sumXY - sumX * sumY;
         a /= _FC_SIZE * sumX2 - sumX * sumX;
-        delta = a * (_FC_SIZE-1);
+        delta = a * (_FC_SIZE - 1);
         
         // расчёт прогноза по Zambretti
         P /= 100;   // -> ГПа
@@ -86,11 +87,17 @@ public:
         return cast;
     }
     
+    // получить изменение давления в Па за 3 часа
+    int getTrend() {
+        return delta;
+    }
+    
 private:
     long Parr[_FC_SIZE];
     float H = 0;
     bool start = false;
     float cast = 0;
+    int delta = 0;
     uint8_t season = 0;
 };
 #endif
