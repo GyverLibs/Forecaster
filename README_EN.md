@@ -1,3 +1,5 @@
+This is an automatic translation, may be incorrect in some places. See sources and examples!
+
 # Forecaster
 Library for determining the weather forecast by pressure for Arduino
 - Determination of a short-term weather forecast using the Zambretti algorithm
