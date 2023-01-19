@@ -17,10 +17,11 @@
     Версии:
     v1.0 - релиз
     v1.1 - добавил вывод тренда давления за 3 часа
+    v1.2 - совместимость esp8266/32
 */
 
-#ifndef Forecaster_h
-#define Forecaster_h
+#ifndef _Forecaster_h
+#define _Forecaster_h
 #include <Arduino.h>
 #define _FC_SIZE 6  // размер буфера. Усреднение за 3 часа, при размере 6 - каждые 30 минут
 
@@ -44,15 +45,14 @@ public:
         }
         
         // расчёт изменения по наименьшим квадратам
-        float a;
-        uint32_t sumX = 0, sumY = 0, sumX2 = 0, sumXY = 0;        
+        long sumX = 0, sumY = 0, sumX2 = 0, sumXY = 0;        
         for (int i = 0; i < _FC_SIZE; i++) {
             sumX += i;
             sumY += Parr[i];
             sumX2 += i * i;
             sumXY += Parr[i] * i;
         }
-        a = _FC_SIZE * sumXY - sumX * sumY;
+        float a = _FC_SIZE * sumXY - sumX * sumY;
         a /= _FC_SIZE * sumX2 - sumX * sumX;
         delta = a * (_FC_SIZE - 1);
         
