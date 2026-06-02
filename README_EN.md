@@ -1,103 +1,109 @@
-This is an automatic translation, may be incorrect in some places. See sources and examples!
+This is an automatic translation and may be incorrect in some places. See the source README and examples for authoritative information.
+
+[![latest](https://img.shields.io/github/v/release/GyverLibs/Forecaster.svg?color=brightgreen)](https://github.com/GyverLibs/Forecaster/releases/latest/download/Forecaster.zip)
+[![PIO](https://badges.registry.platformio.org/packages/gyverlibs/library/Forecaster.svg)](https://registry.platformio.org/libraries/gyverlibs/Forecaster)
+[![Foo](https://img.shields.io/badge/Website-AlexGyver.ru-blue.svg?style=flat-square)](https://alexgyver.ru/)
+[![Foo](https://img.shields.io/badge/%E2%82%BD%24%E2%82%AC%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B0-orange.svg?style=flat-square)](https://alexgyver.ru/support_alex/)
+[![Foo](https://img.shields.io/badge/README-ENGLISH-blueviolet.svg?style=flat-square)](https://github-com.translate.goog/GyverLibs/Forecaster?_x_tr_sl=ru&_x_tr_tl=en)  
+
+[![Foo](https://img.shields.io/badge/ПОДПИСАТЬСЯ-НА%20ОБНОВЛЕНИЯ-brightgreen.svg?style=social&logo=telegram&color=blue)](https://t.me/GyverLibs)
 
 # Forecaster
-Library for determining the forecast for pressure on arduino
-- Definition of a short -term weather forecast for the Zambretti algorithm
-- Takes pressure, temperature, height above the ur.Seas and month of the year
-- Determination of the pressure trend using linarization
+Pressure weather forecast library for Arduino
+- Determination of short-term weather forecast by Zambretti algorithm
+- Takes pressure, temperature, altitude above the sea and month of the year
+- Determining the pressure trend using linearization
 
-## compatibility
-Compatible with all arduino platforms (used arduino functions)
+### Compatibility
+Compatible with all Arduino platforms (Arduino features are used)
 
-## Content
-- [installation] (# Install)
-- [initialization] (#init)
-- [use] (#usage)
-- [Example] (# Example)
-- [versions] (#varsions)
-- [bugs and feedback] (#fedback)
+## Contents
+- [Installation](#install)
+- [Initialization](#init)
+- [Use of use](#usage)
+- [Example](#example)
+- [Versions](#versions)
+- [Bugs and feedback](#feedback)
 
-<a id="install"> </a>
+<a id="install"></a>
 ## Installation
-- The library can be found by the name ** Forecaster ** and installed through the library manager in:
-    - Arduino ide
-    - Arduino ide v2
-    - Platformio
-- [download the library] (https://github.com/gyverlibs/Forecaster/archive/refs/heads/main.zip) .Zip archive for manual installation:
-    - unpack and put in * C: \ Program Files (X86) \ Arduino \ Libraries * (Windows X64)
-    - unpack and put in * C: \ Program Files \ Arduino \ Libraries * (Windows X32)
-    - unpack and put in *documents/arduino/libraries/ *
-    - (Arduino id) Automatic installation from. Zip: * sketch/connect the library/add .Zip library ... * and specify downloaded archive
-- Read more detailed instructions for installing libraries [here] (https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%BD%D0%BE%BE%BE%BED0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
+- The library can be found under the name **Forecaster** and installed through the library manager in:
+    - Arduino IDE
+    - Arduino IDE v2
+    - PlatformIO
+- [Download the library](https://github.com/GyverLibs/Forecaster/archive/refs/heads/main.zip).zip archive for manual installation:
+    - Unpack and put in *C:\Program Files (x86)\Arduino\libraries* (Windows x64)
+    - Unpack and put in *C:\Program Files\Arduino\libraries* (Windows x32)
+    - Unpack and put in *Documents/Arduino/libraries/ *
+    - (Arduino IDE) Automatic installation from .zip: *Sketch/Connect library/Add .ZIP library...* and specify downloaded archive
+- Read more detailed instructions for installing libraries[here](https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
 ### Update
-- I recommend always updating the library: errors and bugs are corrected in the new versions, as well as optimization and new features are added
-- through the IDE library manager: find the library how to install and click "update"
-- Manually: ** remove the folder with the old version **, and then put a new one in its place.“Replacement” cannot be done: sometimes in new versions, files that remain when replacing are deleted and can lead to errors!
+- I recommend always updating the library: new versions fix errors and bugs, as well as optimize and add new features.
+- Through the library manager IDE: find the library as when installing and click "Update"
+- Manually: **Delete the folder with the old version** and then put the new one in its place. “Replacement” can not be done: sometimes new versions delete files that will remain when replaced and can lead to errors!
 
+<a id="init"></a>
+## Initialization
+```cpp
+Forecaster cond;
+```
 
-<a id="init"> </a>
-## initialization
-`` `CPP
-Forecaster Cond;
-`` `
+<a id="usage"></a>
+## Use of use
+```cpp
+void setH(int h);               // set the height above sea level (in meters)
+void addP(long P, float t);     // Add the current pressure to Pa and the temperature to C (every 30 minutes), here the calculation takes place.
+void addPmm(float P, float t);  // add current pressure in mmHg and temperature in C (Each 30 minutes)
+void setMonth(uint8_t month);   // Set a month (1-12), 0 to turn off seasonality
+float getCast();                // Get a forecast (0 good weather) 10 downpours-storms
+int getTrend();                 // Get a pressure change in Pa in 3 hours
+```
 
-<a id="usage"> </a>
-## Usage
-`` `CPP
-VOID Seth (inth);// set a height above sea level (in meters)
-Void Addp (Long P, Float T);// Add the current pressure in PA and temperature in C (every 30 minutes), there is also a calculation
-Void Addpm (Float P, Float T);// Add the current pressure in mm hg and temperature in C (every 30 minutes)
-VOID SetMonth (Uint8_t Month);// install a month (1-12), 0 to turn off seasonality
-Float getcast ();// Get a forecast (0 Good weather ... 10 rain-storm)
-Inttrend ();// get a change in pressure in Pa in 3 hours
-`` `
-
-<a id="EXAMPLE"> </a>
+<a id="example"></a>
 ## Example
-`` `CPP
+```cpp
 #include "Forecaster.h"
-Forecaster Cond;
+Forecaster cond;
 
-VOID setup () {
-  Serial.Begin (9600);
-  // set a height above sea level (Moscow 255m)
-  Cond.Seth (255);
+void setup() {
+  Serial.begin(9600);
+  // set the altitude above sea level (Moscow 255 m)
+  cond.setH(255);
 
-  // if there is RTC - you can install a month 1-12
-  //cond.setmonth (5);
+  // If you have an RTC, you can set the month 1-12.
+  //cond.setMonth(5);
 }
-VOID loop () {
-  // timer for 30 minutes
-  Static uint32_t tmr;
-  if (millis () - tmr> = 30*60*1000ul) {
-    TMR = Millis ();
-    // every 30 minutes we transmit the current pressure (PA) and temperature (c) from the sensor
-    Cond.Addp (99218, 25.2);
+void loop() {
+  // timer
+  static uint32_t tmr;
+  if (millis() - tmr >= 30*60*1000ul) {
+    tmr = millis();
+    // Every 30 minutes transmit the current pressure (Pa) and temperature (C) from the sensor
+    cond.addP(99218, 25.2);
 
-    // getcast () returns the current forecast from 0 to 10
-    // 0 - good weather, 10 and above - storm/rain
-    Serial.println (cond.getcast ());
+    // getCast() returns the current forecast from 0 to 10
+    // 0 - good weather, 10 and above - storm / shower
+    Serial.println(cond.getCast());
   }
 }
-`` `
+```
 
-<a id="versions"> </a>
-## versions
-- V1.0
-- V1.1 - added the output of the pressure trend in 3 hours
-- V1.2 - Compatibility ESP8266/32
+<a id="versions"></a>
+## Versions
+- v1.0
+- v1.1 - added a pressure trend in 3 hours
+- v1.2 - compatibility esp8266/32
 
-<a id="feedback"> </a>
-## bugs and feedback
-Create ** Issue ** when you find the bugs, and better immediately write to the mail [alex@alexgyver.ru] (mailto: alex@alexgyver.ru)
-The library is open for refinement and your ** pull Request ** 'ow!
+<a id="feedback"></a>
+## Bugs and feedback
+If you find bugs, create **Issue**, or better write to the mail immediately.[alex@alexgyver.ru](mailto:alex@alexgyver.ru)  
+The library is open for revision and your **Pull Requests*!
 
-
-When reporting about bugs or incorrect work of the library, it is necessary to indicate:
-- The version of the library
-- What is MK used
+When reporting bugs or incorrect work of the library, it is necessary to specify:
+- Library version
+- What is used by the IC
 - SDK version (for ESP)
-- version of Arduino ide
-- whether the built -in examples work correctly, in which the functions and designs are used, leading to a bug in your code
-- what code has been loaded, what work was expected from it and how it works in reality
-- Ideally, attach the minimum code in which the bug is observed.Not a canvas of a thousand lines, but a minimum code
+- Arduino IDE version
+- Are embedded examples that use features and designs that cause bugs in your code working correctly?
+- What code was downloaded, what work was expected from it and how it works in reality
+- Ideally, attach the minimum code in which the bug is observed. Not a canvas of a thousand lines, but a minimum code.
